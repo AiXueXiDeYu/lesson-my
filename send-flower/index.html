@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>代码设计模式之代理模式</h1>
+    <script>
+        // 付宇
+        // document.write('付宇')
+        // 对象字面量 描述功能 表现力
+        // 对象由属性和方法构成
+        // 动作
+        let fy = {
+            name: '付宇',
+            age: 20,
+            hometown: '宜春',
+            // hasgirfriend:false
+            isSingle: true,
+            //形参
+            sendflower (h){
+                h.receiveflower(fy)
+            }
+        }
+        let xm = {
+            name: '小美',
+            age: 18,
+            hometown: '南昌',
+            receiveflower (h){
+                console.log(`收到了${h.name}的花`);
+            }
+        }
+    </script>
+</body>
+</html>
