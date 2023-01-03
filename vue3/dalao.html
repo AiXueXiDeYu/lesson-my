@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大佬列表</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+    // Vue 2.0 与3.0 有区别
+    // Web app 单例 
+    const app =  Vue.createApp({
+        data() {
+            return {  // 一修改， 界面会自动更新
+                list: [],  // 开始为空
+                inputValue: '' // 表单  
+            }
+        },
+        methods: {   // v-on:click 绑定的事件 
+         doInput(e) {
+            console.log(e);
+            this.inputValue = e.target.value
+         },
+         handleAddItem() {
+            // 数据驱动
+            if(this.inputValue){
+               this.list.push(this.inputValue)
+               this.inputValue = '' // 小细节 添加后清空
+            }
+            
+         }
+        },
+        mounted() {
+         // setTimeout(() => {
+         //    this.inputValue = '胡总'
+         // },1000)
+         // 模板 + js 结合 挂载
+         // ajax  争抢
+         setTimeout(() => {
+            this.list = [
+               '汪','龙'
+            ]
+         },2000)
+        },
+        template: `
+            <div>
+               <!--
+                  v-if
+                  v-bind:click
+                  v-model ? 
+                  : 简洁 "" 里面是JS 区域 
+                  v-  指令  directive 
+                  占位符
+                  prpos? attribute 动态绑定
+               -->
+               <!--
+               <input :value="inputValue" @input="doInput">
+               -->
+               <input v-model="inputValue">
+               <button @click="handleAddItem">添加大佬</button>
+               <div>{{inputValue}}</div>
+               <div v-if=!"list.length">
+                  目前还没有数据， 加载中...
+               </div>
+               <my-title />
+               <!--
+               <ul v-if="list.length">
+                  <li v-for="(item, index) of list">
+                     {{index}}-{{item}}   
+                  </li>
+               </ul>
+               -->
+               <my-dalao 
+                  v-for="(item, index) of list"
+                  v-bind:item="item"
+                  v-bind:index="index"
+               />
+            </div>
+        `
+    })
+   //  console.log(app);
+   // 组件化思想
+   // wxml wxss js json Page() Component() properties 
+   // 组件 HTML + css js 封装
+   // 自定义的组件名代表某个 html + css + js 集合功能
+   app.component('my-title', {
+      template:'<h1 style="text-align:center;">大佬集合</h1>'
+   })
+   app.component('my-dalao', {
+      props:['item','index'], // 简化申明
+      template:`
+         <li>
+            【{{index}}】-【{{item}}】   
+         </li>
+      `
+   })
+   // vue 是一个现代前端 MVVM 设计模式开发框架
+   // m (model) ？ 模型层 数据驱动
+   // view 视图层 v 组件化
+   // 结合且生成 html str vm 把数据和模板自动关联起来 vm
+   const vm = app.mount('#app') // 第一个最外层组件
+   console.log(vm,'---');
+   </script>
+</body>
+</html>
