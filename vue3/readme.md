@@ -54,3 +54,32 @@
    - 双向数据绑定
       v-model = v-bind:value + v-on:input
       api更友好
+
+- 生命周期 MVVM
+   Model View
+   - create 创建阶段， 在内存中
+      创建之前会先监听事件和生命周期钩子函数 beforeCreate
+      数据的绑定和响应式 get set defineProperty
+
+   - mount  从内存中 去到页面真实DOM上
+      template 编译成 dom string beforeMount
+      dom string => app.mount('#app') mounted
+
+   - update 组件不是静态的  counter
+      事件
+      数据请求
+      this.counter
+      this.$data.counter   beforeUpdate   new dom string
+      new domstring => DOM 显示  update
+
+   - unmount
+      命令 卸载 beforeUnmount
+      unmounted 已经卸载， DOM removeChild
+
+- VUE 数据类型 除了data props
+   data 私有数据
+   props 传参
+   computed 计算属性
+
+- 父子组件的生命周期
+   局部和整体的概念来处理
