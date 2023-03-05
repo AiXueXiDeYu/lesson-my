@@ -1,13 +1,13 @@
 import { ref, Ref } from "vue";
 import { defineStore } from "pinia";
-
-type Product = {
+ type Product = {
    id: number;
    title: string;
    price: string;
    description: string;
    category: string;
-   image: string
+   image: string;
+
 }
 
 export const useProductStore = defineStore('products', () => {

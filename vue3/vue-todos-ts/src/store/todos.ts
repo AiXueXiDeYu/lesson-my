@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid';
 import { defineStore } from 'pinia' // 直接将某个模块的状态函数化
-import { ref, Ref, reactive } from 'vue'
-// 为todo 提供一个永久性的  
+import { ref, Ref, reactive, computed } from 'vue'
+// 为todo 提供一个持久化的  
 // 告别类似编程 ——> 函数式
 type Todo = {
    id: string;
@@ -38,9 +38,41 @@ export const useTodoStore = defineStore('todos', () => {
          todos.value =JSON.parse(lstodos)
       }
    }
+
+   const completedTodos = computed  (() => 
+      todos.value.filter(todo => todo.isComplete === true)
+   )
+
+   const incompleteTodos = computed  (() => 
+      todos.value.filter(todo => todo.isComplete !== true)
+   )
+
+   const toggleTodo =(id: string) => {
+      // todos 更新
+      todos.value.forEach(todo => {
+         if (todo.id === id) todo.isComplete = !todo.isComplete
+      }) // 引用式
+      updateLocalStorage()
+   }
+
+   const clearCompletedTodos = () => {
+      todos.value = todos.value.filter(todo => todo.isComplete === false)
+      updateLocalStorage()
+   }
+
+   const deleteTodo = (id: string) => {
+      todos.value = todos.value.filter(todo => todo.id !== id)
+      updateLocalStorage()
+   }
+
    return {
       todos,
       addTodo,
-      initFromLocalStorage
+      initFromLocalStorage,
+      completedTodos,
+      incompleteTodos,
+      toggleTodo,
+      clearCompletedTodos,
+      deleteTodo
    }
 })
