@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+</head>
+<body>
+   <script>
+      // concurrent 并发
+      async function batchRequests(options) {
+         let query = { offset: 0, limit: options.limit }
+         let promises = []
+         do {
+            batch = await model.findAll(query)
+            query.offset += options.limit
+            if (batch.length) {
+               const promise = doLongRequestForBatch(batch)
+               .then(() => {
+                  _.remone(promises, p => p === promise)
+               })
+               promises.push(promise)
+            }
+            if (promise.length >= options.concurrentBatches) {
+               await Promise.race(promise)
+            }
+         } while (batch.length)
+      }
+      // 并发
+      batchRequests({limit: 100, concurrentBatches: 5})
+   </script>
+</body>
+</html>
