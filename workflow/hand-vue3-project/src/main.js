@@ -7,6 +7,7 @@
 
 import { createApp } from 'vue' // 依赖关系
 import App from './App.vue'
+import './assets/a.png' // 一切静态资源都可以打包
 
 const app = createApp(App)
 app.mount('#root')
