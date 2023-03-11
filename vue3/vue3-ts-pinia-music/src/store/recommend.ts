@@ -1,17 +1,18 @@
-import { ref } from  'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import { getBanner } from '@/service/recommend'
+import { getBanners } from '@/service/recommend'
+
 
 export const useRecommendStore = defineStore('recommend', () => {
-   const banner = ref([])
-   const getBannerData = async () => {
-      const data = await getBanner()
-      console.log(data, '///');
-      
-      banner.value = data.banners
-   }
-   return {
-      banner,
-      getBannerData,
-   }
+  const banners = ref([])
+  const getBannersData = async () => {
+    const data = await getBanners()
+    console.log(data,'/////');
+    
+    banners.value = data.banners
+  }
+  return {
+    banners,
+    getBannersData
+  }
 })

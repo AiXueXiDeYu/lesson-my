@@ -1,3 +1,3 @@
-import axios from "./config"
+import axios from "./config";
 
-export const getBanner = () => axios.get('/banner')
+export const getBanners = () => axios.get('/banner')

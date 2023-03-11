@@ -1,24 +1,24 @@
 <template>
-   <div class="home">
-      <header class="header">
-         <Header></Header>
-      </header>
-      <aside>
-         <SideBar></SideBar>
-      </aside>
-      <main class="main" :class="{cover: isCover }">
-         <div class="main-page" id="mainPage" ref="mainRef">
-            <router-view></router-view>
-         </div>
-      </main>
-   </div>
+  <div>
+    <header class="header">
+      <Header />
+    </header>
+    <aside>
+      <SideBar />
+    </aside>
+    <main class="main" :class="{cover: isCover}">
+      <div class="main-page" id="mainPage" ref="mainRef">
+        <router-view></router-view>
+      </div>
+    </main>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { computed,ref } from 'vue';
+import Header from '@/layout/header/Header.vue';
+import SideBar from '@/layout/SideBar.vue';
+import { computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
-import Header from '@/layout/header/Header.vue'
-import SideBar from '@/layout/SideBar.vue'
 
 const mainRef = ref(null)
 const route = useRoute()

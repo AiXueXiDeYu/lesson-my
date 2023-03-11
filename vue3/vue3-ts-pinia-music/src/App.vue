@@ -1,19 +1,15 @@
-<template>
-  <div>
-    <router-view></router-view>
-  </div>
-</template>
-
 <script setup lang="ts">
-// import { onMounted } from 'vue';
-// import { getBanner } from '@/service/recommend'
+import { onMounted } from 'vue';
 
-// onMounted(async () => {
-//   const data = await getBanner()
-//   console.log(data);
-  
-// })
+
+onMounted(async () => {
+
+})
 </script>
+
+<template>
+  <router-view></router-view>
+</template>
 
 <style scoped>
 

@@ -1,19 +1,18 @@
 <template>
-   <div class="recommend">
-      <Banner v-if="banner.length" :banner="banner"></Banner>
-   </div>
+  <div class="recommend">
+    <Banners v-if="banners.length" :banners="banners"/>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted, computed } from 'vue';
 import { useRecommendStore } from '@/store/recommend';
-import Banner from '@/components/banner/Index.vue'
+import Banners from '@/components/banners/Index.vue'
 
 const recommendStore = useRecommendStore()
-const banner = computed(() => recommendStore.banner) 
-
+const banners = computed(() => recommendStore.banners)
 onMounted(async () => {
-   await recommendStore.getBannerData()
+  await recommendStore.getBannersData()
 })
 </script>
 
